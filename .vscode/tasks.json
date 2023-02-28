@@ -8,27 +8,36 @@
 			"type": "shell",
 			"label": "cmake",
 			"command": "cmake",
+			"group": {
+				"kind":"build",
+			},
 			"args": [
 				".."
-			]
+			],
+
 		},
 		{
 			"label": "make",
+			"type": "shell",
+			"group": {
+				"kind": "build",
+			},
+			"command": "make",
+			"dependsOn":[
+				"cmake"
+			]
+		},
+		{
+			"label": "run",  
+			"type": "shell",
+			"dependsOn":[
+				"make",
+			],
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
-			"command": "make",
-			"args": [
- 
-			]
-		},
-		{
-			"label": "Build",  
-			"dependsOn":[
-				"cmake",
-				"make"
-			]
+			"command": "./OpenGl",
 		}
 	]
 }
