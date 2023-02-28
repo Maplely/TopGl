@@ -1,5 +1,5 @@
-#include <glad/glad.h>
-#include <glfw3.h>
+#include <glad3.3/glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <math.h>
 #include <iostream>
 

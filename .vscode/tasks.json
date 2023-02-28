@@ -14,7 +14,20 @@
 			"args": [
 				".."
 			],
+			"dependsOn":[
+				"builddir"
+			]
 
+		},{
+			"type": "shell",
+			"label": "builddir",
+			"command": "./build.sh",
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind":"build",
+			},
 		},
 		{
 			"label": "make",
@@ -37,7 +50,7 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"command": "./OpenGl",
+			"command": "./OpenGL",
 		}
 	]
 }
