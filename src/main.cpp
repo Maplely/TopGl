@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 #include <glfw3.h>
-
+#include <math.h>
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -22,10 +22,10 @@ const char *vertexShaderSource ="#version 330 core\n"
 
 const char *fragmentShaderSource = "#version 330 core\n"
     "out vec4 FragColor;\n"
-    "in vec3 ourColor;\n"
+    "uniform vec4 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = vec4(ourColor, 1.0f);\n"
+    "   FragColor = ourColor;\n"
     "}\n\0";
 
 int main()
@@ -134,6 +134,8 @@ int main()
     // as we only have a single shader, we could also just activate our shader once beforehand if we want to 
     glUseProgram(shaderProgram);
 
+
+
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -150,6 +152,11 @@ int main()
         // render the triangle
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        float timeValue= glfwGetTime();
+        float greenValue = (sin(timeValue)/2.0f)+0.5;
+        int vertexColorLoacatino = glGetUniformLocation(shaderProgram,"ourColor");
+        glUniform4f(vertexColorLoacatino,0.0f,greenValue,0.0f,1.0f);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
