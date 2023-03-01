@@ -64,6 +64,8 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "vector": "cpp",
-        "glad.h": "c"
+        "glad.h": "c",
+        "string.h": "c",
+        "stdlib.h": "c"
     }
 }
