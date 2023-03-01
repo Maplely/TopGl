@@ -66,6 +66,10 @@
         "vector": "cpp",
         "glad.h": "c",
         "string.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "fstream": "cpp",
+        "queue": "cpp"
     }
 }
