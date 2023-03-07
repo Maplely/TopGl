@@ -21,7 +21,7 @@ link_libraries(${OPENGL} ${GLFW_LINK})
 # 这个glad.c在第2步中说过要拉到项目中，注意路径
 # set(GLAD_SOURCE ${PROJECT_SOURCE_DIR}/src/glad.c )
 file(GLOB_RECURSE C_SOURCE ${PROJECT_SOURCE_DIR}/src/*.c ${PROJECT_SOURCE_DIR}/src/*.cpp)
-
+file(COPY ${PROJECT_SOURCE_DIR}/resources/container.jpg DESTINATION ${CMAKE_BINARY_DIR}/)
 set(SOURCE_FILES ${C_SOURCE})
 add_executable(OpenGL ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${CMAKE_DL_LIBS})
