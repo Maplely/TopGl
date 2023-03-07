@@ -10,9 +10,12 @@
 class Shader
 {
 public:
+    unsigned int texture1;
+    unsigned int texture2;
     unsigned int ID;
     Shader(const char *vertextPath, const char *framentPath);
     void use();
+    void start();
     void setBool(const std::string &name, bool value) const;
     void setInt(const std::string &name, int value) const;
     void setFloat(const std::string &name, float value) const;
