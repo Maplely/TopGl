@@ -103,6 +103,7 @@ int main()
         
         // render the triangle
         ourShader.use();
+        
   
 
         glBindVertexArray(VAO);
