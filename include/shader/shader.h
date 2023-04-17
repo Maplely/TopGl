@@ -6,6 +6,7 @@
 #include <sstream>
 #include <iostream>
 #include <glad/glad.h>
+#include <glm/glm.hpp>
 #include "shader/stb_image.h"
 class Shader
 {
@@ -19,6 +20,7 @@ public:
     void setBool(const std::string &name, bool value) const;
     void setInt(const std::string &name, int value) const;
     void setFloat(const std::string &name, float value) const;
+    void setMat4(const std::string &name , const glm::mat4 &mat) const ;
 
 private:
     void checkCompileErrors(unsigned int shader, std::string type);
