@@ -126,6 +126,8 @@ int main()
     glEnableVertexAttribArray(1);
 
     ourShader.start();
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+    ourShader.setMat4("projection", projection); 
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
@@ -137,15 +139,15 @@ int main()
         // render
         // ------
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         
         // render the triangle
         ourShader.use();
         
         glm::mat4 view = glm::mat4(1.0f);
         float radius = 10.0f;
-        float camX = static_cast<float>(sin(glfwGetTime()*radius));
-        float camZ = static_cast<float>(cos(glfwGetTime()*radius));
+        float camX = static_cast<float>(sin(glfwGetTime()) * radius);
+        float camZ = static_cast<float>(cos(glfwGetTime()) * radius);
 
         view = glm::lookAt(glm::vec3(camX,0.0f,camZ),glm::vec3(0.0f,0.0f,0.0f),glm::vec3(0.0f,1.0f,0.0f));
         ourShader.setMat4("view", view);
