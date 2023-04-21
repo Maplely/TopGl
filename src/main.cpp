@@ -1,4 +1,4 @@
-#define STB_IMAGE_IMPLEMENTATION
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <math.h>
@@ -14,6 +14,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width , int height);
 void mouse_callback(GLFWwindow* window, double xpose,double ypos);
 void scroll_callback(GLFWwindow* window,double xoffset,double yoffset);
 void processInput(GLFWwindow *window);
+void GLCheckError();
 
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -114,8 +115,8 @@ int main(){
     glBindBuffer(GL_ARRAY_BUFFER,VBO);
     glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
     glBindVertexArray(cubeVAO);
-
     glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
+    glEnableVertexAttribArray(0);
 
     unsigned int lightCubeVAO;
 
@@ -126,7 +127,7 @@ int main(){
     glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3* sizeof(float),(void*)0);
     
     glEnableVertexAttribArray(0);
-
+    GLCheckError();     
     while(!glfwWindowShouldClose(window)){
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
@@ -134,7 +135,7 @@ int main(){
 
         processInput(window);
 
-        glClearColor(0.1f,0.1f,0.1f,0.1f);
+        glClearColor(0.1f,0.1f,0.1f,1.0f);
         glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
 
         lightingShader.use();
@@ -160,8 +161,10 @@ int main(){
         model = glm::translate(model ,lightPos);
         model = glm::scale(model,glm::vec3(0.2f));
         lightingShader.setMat4("model",model);
+        
         glBindVertexArray(lightCubeVAO);
         glDrawArrays(GL_TRIANGLES,0,36);
+        
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -228,4 +231,12 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
+}
+
+ void GLCheckError()
+{
+	while (GLenum error = glGetError())
+	{
+		std::cout << "[OpenGL Error](" << error << ")" << std::endl;
+	}
 }
